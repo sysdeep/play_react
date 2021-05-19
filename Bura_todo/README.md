@@ -4,9 +4,19 @@
 
 
 
+last - 38(2021.05.19)
+
+
+Alt+Ctr+f - prettier
 
 -----
 
+
+
+
+https://zavoloklom.github.io/material-design-iconic-font/icons.html
+
+-----
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
