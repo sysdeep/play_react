@@ -6,38 +6,38 @@ import "./TodoListItem.css";
 
 class TodoListItem extends React.Component {
 
-	constructor() {
-		super();
+	// constructor() {
+	// 	super();
 
-		this.state = {
-			done: false,
-			important: false,
-		}
-	}
+	// 	// this.state = {
+	// 	// 	done: false,
+	// 	// 	important: false,
+	// 	// }
+	// }
 
-	onLabelClick() {
-		// console.log(`Done ${this.props.label}`)
-		this.setState((state) => {
-			return {
-				done: !state.done
-			}
-		})
-	}
+	// onLabelClick() {
+	// 	// console.log(`Done ${this.props.label}`)
+	// 	// this.setState((state) => {
+	// 	// 	return {
+	// 	// 		done: !state.done
+	// 	// 	}
+	// 	// })
+	// }
 
 
-	onMarkImportant() {
-		this.setState((state) => {
-			return {
-				important: !state.important
-			}
-		})
-	}
+	// onMarkImportant() {
+	// 	// this.setState((state) => {
+	// 	// 	return {
+	// 	// 		important: !state.important
+	// 	// 	}
+	// 	// })
+	// }
 
 
 	render() {
 
-		const { label } = this.props;
-		const { done, important } = this.state;
+		const { label, done, important } = this.props;
+		// const { done, important } = this.state;
 
 
 		let classNames = "todo-list-item";
@@ -59,20 +59,23 @@ class TodoListItem extends React.Component {
 
 				<span
 					className="todo-list-item-label"
-					onClick={() => this.onLabelClick()}
-				>
+					onClick={() => this.props.onToggleDone()}
+					>
 					{label}
+					{done}
 				</span>
 
 				<button type="button"
 					className="btn btn-outline-success btn-sm float-end"
-					onClick={() => this.onMarkImportant()}
-				>
+					onClick={() => this.props.onToggleImportant()}
+					>
 					<i className="zmdi zmdi-run"></i>
 				</button>
 
 				<button type="button"
-					className="btn btn-outline-danger btn-sm float-end">
+					className="btn btn-outline-danger btn-sm float-end"
+					onClick={() => this.props.onDeleted()}
+					>
 					<i className="zmdi zmdi-delete"></i>
 				</button>
 
