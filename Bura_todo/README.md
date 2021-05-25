@@ -4,7 +4,7 @@
 
 
 
-last - 45(2021.05.24)
+last - 48(2021.05.25) - full complete!!!
 
 
 Alt+Ctr+f - prettier

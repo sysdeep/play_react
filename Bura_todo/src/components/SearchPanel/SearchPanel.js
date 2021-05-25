@@ -1,14 +1,22 @@
 import React from 'react';
 import "./SearchPanel.css"
 
-const SearchPanel = () => {
+const SearchPanel = ({onFilterSearch}) => {
 
     const search_text = "search";
 
-    return (
-        <input type="text" className="form-control search-input"
 
-            placeholder={search_text} />
+    return (
+
+        <div>
+
+            <input type="text" className="form-control search-input"
+
+                onChange={(e) => onFilterSearch(e.target.value)}
+                placeholder={search_text} />
+
+           
+        </div>
     );
 }
 

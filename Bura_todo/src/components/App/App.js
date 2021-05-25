@@ -27,7 +27,8 @@ class App extends React.Component {
                 // { id: 3, label: "Have a lunch", important: false },
             ],
 
-
+            searchTerm: "",
+            filterType: "all",      // all, active, done
         }
 
 
@@ -122,13 +123,47 @@ class App extends React.Component {
         })
     }
 
+    onFilterType(ftype){
+        this.setState({
+            filterType: ftype
+        });
+    }
+
+    onFilterSearch(term){
+        let lower_term = term.toLowerCase();
+
+        this.setState({
+            searchTerm: lower_term
+        })
+
+    }
+
 
 
     render() {
-        const { todoData } = this.state
+        const { todoData, searchTerm, filterType } = this.state
         const doneCount = todoData.filter(r => r.done === true).length;
         const todoCount = todoData.length - doneCount;
 
+
+        const filteredTodo = todoData
+        .filter(todo => {
+            if(filterType === "done"){
+                return todo.done === true;
+            }
+
+            if(filterType === "active"){
+                return todo.done !== true;
+            }
+
+            return todo;
+        })
+        .filter(todo => {
+            if(searchTerm.length === 0)  return todo;
+            
+            let lower_label = todo.label.toLowerCase();
+            return lower_label.indexOf(searchTerm) > -1;
+        })
 
         return (
             <div className="todo-app">
@@ -139,11 +174,16 @@ class App extends React.Component {
                 <AppHeader toDo={todoCount} done={doneCount} />
                 <div className="top-panel d-flex">
 
-                    <SearchPanel />
-                    <ItemStatusFilter />
+                    <SearchPanel 
+                        onFilterSearch={(value) => this.onFilterSearch(value)}
+                        />
+                    <ItemStatusFilter 
+                        onFilterType={(ftype) => this.onFilterType(ftype)}
+                        ftype={filterType}
+                        />
                 </div>
                 <TodoList
-                    todos={todoData}
+                    todos={filteredTodo}
                     onDeleted={(id) => this.onDelete(id)}
                     onToggleImportant={(id) => this.onToggleImportant(id)}
                     onToggleDone={(id) => this.onToggleDone(id)}

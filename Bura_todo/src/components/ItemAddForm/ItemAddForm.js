@@ -22,6 +22,9 @@ export default class ItemAddForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
+        
+        if(this.state.msg.length === 0) return false;
+
         this.props.onAddItem(this.state.msg)
         this.setState((state) => {
             return { msg: "" }
